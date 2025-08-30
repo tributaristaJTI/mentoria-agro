@@ -1,0 +1,1665 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria Reforma Tributária - Aplicativo Completo Atualizado</title>
+    <style>
+        :root {
+            --primary: #1A6873;
+            --primary-light: #2E8B91;
+            --secondary: #A84B2F;
+            --accent: #E6815F;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --info: #3b82f6;
+            --bg: #F5F3E7;
+            --surface: #FFFFFF;
+            --text: #1F2121;
+            --text-light: #626C7C;
+            --border: rgba(46, 139, 145, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg) 0%, #fff 100%);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(26, 104, 115, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .nav-btn.active {
+            background: white;
+            color: var(--primary);
+        }
+
+        .section {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding: 2rem 0;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .alert {
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border-left: 4px solid;
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--info);
+            color: #1e40af;
+        }
+
+        .alert.success {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: var(--success);
+            color: #166534;
+        }
+
+        /* Home Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(26, 104, 115, 0.05) 0%, rgba(46, 139, 145, 0.02) 100%);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Simulador Avançado */
+        .simulator-advanced {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .simulator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .input-panel {
+            background: linear-gradient(135deg, var(--bg) 0%, #fff 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 2px solid var(--border);
+        }
+
+        .input-panel h3 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--surface);
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 104, 115, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 104, 115, 0.3);
+        }
+
+        .btn.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .results-panel {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(34, 197, 94, 0.02) 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 2px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .results-panel h3 {
+            color: var(--success);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .quick-result {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .quick-result .value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-result .label {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .quick-result .percentage {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .quick-result .percentage.positive { color: var(--success); }
+        .quick-result .percentage.negative { color: var(--error); }
+
+        /* Detailed Results */
+        .detailed-results {
+            margin-top: 3rem;
+        }
+
+        .comparison-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .scenario-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid;
+        }
+
+        .scenario-card.current {
+            border-color: var(--info);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(59, 130, 246, 0.02));
+        }
+
+        .scenario-card.reform {
+            border-color: var(--success);
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(34, 197, 94, 0.02));
+        }
+
+        .scenario-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tax-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .tax-item:last-child {
+            border-bottom: none;
+        }
+
+        .tax-item.total {
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-top: 2px solid var(--primary);
+            margin-top: 1rem;
+            padding-top: 1rem;
+        }
+
+        .tax-label {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .tax-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .tax-value.credit {
+            color: var(--success);
+        }
+
+        .responsible {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Impact Analysis */
+        .impact-analysis {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+        }
+
+        .impact-analysis h4 {
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .impact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .impact-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Credits Comparison */
+        .credits-comparison {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .credits-comparison h4 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .credits-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .credits-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .credits-tab:hover {
+            background: rgba(26, 104, 115, 0.05);
+        }
+
+        .credits-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .credits-content {
+            display: none;
+        }
+
+        .credits-content.active {
+            display: block;
+        }
+
+        .credits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .credit-column {
+            padding: 2rem;
+            border-radius: 16px;
+            border: 2px solid;
+        }
+
+        .credit-column.positive {
+            background: rgba(34, 197, 94, 0.05);
+            border-color: var(--success);
+        }
+
+        .credit-column.negative {
+            background: rgba(239, 68, 68, 0.05);
+            border-color: var(--error);
+        }
+
+        .credit-column.full-reform {
+            grid-column: 1 / -1;
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+        }
+
+        .credit-column h5 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .credit-list {
+            list-style: none;
+        }
+
+        .credit-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 0.95rem;
+        }
+
+        .credit-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Calculator Expandida */
+        .calculator-expanded {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .calc-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .calc-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .calc-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .calc-content {
+            display: none;
+        }
+
+        .calc-content.active {
+            display: block;
+        }
+
+        .inputs-categories {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .inputs-category {
+            background: linear-gradient(135deg, var(--bg) 0%, #fff 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .inputs-category h5 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .inputs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .inputs-grid .input-group {
+            margin-bottom: 0;
+        }
+
+        .inputs-grid input {
+            padding: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .inputs-grid label {
+            font-size: 0.9rem;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(26, 104, 115, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-right: 2rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .question-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .question-card h3 {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-btn {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: rgba(26, 104, 115, 0.05);
+        }
+
+        .option-btn.correct {
+            border-color: var(--success);
+            background: rgba(34, 197, 94, 0.1);
+            color: #166534;
+        }
+
+        .option-btn.incorrect {
+            border-color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
+            color: #991b1b;
+        }
+
+        .explanation-card {
+            background: rgba(26, 104, 115, 0.05);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+
+        .explanation-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .simulator-grid,
+            .comparison-cards,
+            .credits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calc-tabs,
+            .credits-tabs {
+                flex-direction: column;
+            }
+
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-title">🌱 AgroTrib - Versão Completa Atualizada</h1>
+            <div class="nav-links">
+                <button class="nav-btn active" data-section="home">Início</button>
+                <button class="nav-btn" data-section="simulator">Simulador</button>
+                <button class="nav-btn" data-section="calculator">Calculadora</button>
+                <button class="nav-btn" data-section="comparison">Comparativo</button>
+                <button class="nav-btn" data-section="quiz">Quiz</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="container">
+            <div class="hero">
+                <h1 class="hero-title">Reforma Tributária para Produtores Rurais</h1>
+                <h2 class="hero-subtitle">Versão Completa e Atualizada</h2>
+                <p class="hero-description">
+                    Ferramenta completa com simulador avançado, calculadora expandida, quadro comparativo 
+                    de créditos e quiz educativo. Dados técnicos corrigidos e fundamentados.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Simulador Avançado</h3>
+                    <p>Análise completa com diferentes estruturas jurídicas, estados e tipos de produto</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Calculadora Expandida</h3>
+                    <p>25+ campos de insumos organizados por categoria com análise detalhada</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚖️</div>
+                    <h3>Quadro Comparativo</h3>
+                    <p>Visualização clara do que gera crédito: sistema atual vs reforma</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Quiz Educativo</h3>
+                    <p>8 perguntas técnicas sobre diferimento e responsabilidade tributária</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulator Section -->
+    <section id="simulator" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>📊 Simulador Avançado</h2>
+                <p>Análise completa considerando estrutura jurídica, estado e tipo de produto</p>
+            </div>
+
+            <div class="alert">
+                <strong>⚠️ Importante:</strong> Este simulador considera as correções técnicas sobre diferimento vs tributação direta. 
+                No regime atual, a pessoa física não paga ICMS diretamente, mas a carga existe na cadeia produtiva.
+            </div>
+
+            <div class="simulator-advanced">
+                <div class="simulator-grid">
+                    <div class="input-panel">
+                        <h3>📝 Configuração da Análise</h3>
+
+                        <div class="input-group">
+                            <label for="sim-revenue">Faturamento Anual (R$)</label>
+                            <input type="number" id="sim-revenue" value="5000000" min="0" step="100000">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="sim-inputs">Insumos Anuais (R$)</label>
+                            <input type="number" id="sim-inputs" value="2000000" min="0" step="50000">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="sim-product">Tipo de Produto</label>
+                            <select id="sim-product">
+                                <option value="in_natura">In Natura (redução 60%)</option>
+                                <option value="processed">Processado (sem redução)</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="sim-structure">Estrutura Atual</label>
+                            <select id="sim-structure">
+                                <option value="pf">Pessoa Física</option>
+                                <option value="pj">Pessoa Jurídica</option>
+                                <option value="integration">Contrato de Integração</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="sim-state">Alíquota ICMS do Estado</label>
+                            <select id="sim-state">
+                                <option value="12">12% (AC, AL, AP, etc.)</option>
+                                <option value="15">15% (Média - Padrão)</option>
+                                <option value="17">17% (BA, PE, etc.)</option>
+                                <option value="18">18% (MG, RJ, SP, etc.)</option>
+                            </select>
+                        </div>
+
+                        <button class="btn" onclick="runAdvancedSimulation()">🚀 Simular Cenário Completo</button>
+                    </div>
+
+                    <div class="results-panel">
+                        <h3>📈 Resultado Rápido</h3>
+                        <div id="quickResult" class="quick-result">
+                            <div style="color: var(--text-light); padding: 2rem;">
+                                Configure os parâmetros ao lado e clique em "Simular" para ver o resultado
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="advancedResults" class="detailed-results" style="display: none;">
+                    <!-- Resultados detalhados serão inseridos aqui -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>💰 Calculadora Expandida</h2>
+                <p>Análise detalhada com 25+ campos de insumos organizados por categoria</p>
+            </div>
+
+            <div class="calculator-expanded">
+                <div class="calc-tabs">
+                    <button class="calc-tab active" data-tab="detailed">Análise Detalhada</button>
+                    <button class="calc-tab" data-tab="structure">Estrutura Jurídica</button>
+                    <button class="calc-tab" data-tab="timeline">Cronograma</button>
+                </div>
+
+                <div class="calc-content active" id="detailed">
+                    <h3>🧮 Calculadora com Campos Expandidos</h3>
+                    <p style="margin-bottom: 2rem; color: var(--text-light);">
+                        Insira os valores detalhados de cada categoria de insumo para uma análise precisa do impacto da reforma.
+                    </p>
+
+                    <div class="input-group" style="max-width: 300px; margin-bottom: 2rem;">
+                        <label for="calc-revenue">Receita Anual (R$)</label>
+                        <input type="number" id="calc-revenue" value="8000000" min="0" step="100000">
+                    </div>
+
+                    <div class="inputs-categories" id="inputsCategories">
+                        <!-- Categorias serão inseridas dinamicamente -->
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn" onclick="calculateDetailedImpact()" style="max-width: 300px;">
+                            🧮 Calcular Impacto Detalhado
+                        </button>
+                    </div>
+
+                    <div id="detailedCalcResults" style="display: none; margin-top: 3rem;">
+                        <!-- Resultados detalhados da calculadora -->
+                    </div>
+                </div>
+
+                <div class="calc-content" id="structure">
+                    <h3>🏗️ Análise de Estrutura Jurídica</h3>
+                    <p style="margin-bottom: 2rem; color: var(--text-light);">
+                        Compare as vantagens e desvantagens de cada estrutura jurídica considerando a reforma tributária.
+                    </p>
+                    <!-- Conteúdo da análise de estrutura -->
+                </div>
+
+                <div class="calc-content" id="timeline">
+                    <h3>📅 Cronograma da Reforma</h3>
+                    <p style="margin-bottom: 2rem; color: var(--text-light);">
+                        Entenda o cronograma de implementação e prepare-se adequadamente.
+                    </p>
+                    <!-- Conteúdo do cronograma -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="comparison" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>⚖️ Quadro Comparativo de Créditos</h2>
+                <p>Visualize claramente o que gera ou não gera crédito no sistema atual vs reforma</p>
+            </div>
+
+            <div class="credits-comparison">
+                <div class="credits-tabs">
+                    <button class="credits-tab active" onclick="showCreditsTab('current')">Sistema Atual</button>
+                    <button class="credits-tab" onclick="showCreditsTab('reform')">Reforma Tributária</button>
+                </div>
+
+                <div class="credits-content active" id="credits-current">
+                    <div class="credits-grid">
+                        <div class="credit-column positive">
+                            <h5>✅ Gera Crédito (ICMS - Limitado)</h5>
+                            <ul class="credit-list">
+                                <li>✅ Fertilizantes e corretivos</li>
+                                <li>✅ Sementes e mudas</li>
+                                <li>✅ Defensivos agrícolas</li>
+                                <li>✅ Ração animal (produção)</li>
+                                <li>✅ Máquinas e implementos agrícolas</li>
+                                <li>✅ Energia elétrica para irrigação</li>
+                                <li>✅ Combustível para tratores</li>
+                                <li>✅ Medicamentos veterinários</li>
+                                <li>✅ Equipamentos de irrigação</li>
+                                <li>✅ Materiais para construção rural</li>
+                            </ul>
+                        </div>
+                        <div class="credit-column negative">
+                            <h5>❌ NÃO Gera Crédito</h5>
+                            <ul class="credit-list">
+                                <li>❌ PIS/COFINS (pessoa física não contribuinte)</li>
+                                <li>❌ Material de escritório</li>
+                                <li>❌ Equipamentos de informática</li>
+                                <li>❌ Veículos administrativos</li>
+                                <li>❌ Seguros gerais (não produtivos)</li>
+                                <li>❌ Energia elétrica residencial/escritório</li>
+                                <li>❌ Combustível para veículos não agrícolas</li>
+                                <li>❌ Serviços de marketing</li>
+                                <li>❌ Depreciação de bens administrativos</li>
+                                <li>❌ Despesas com pessoal</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="alert" style="margin-top: 2rem;">
+                        <strong>⚠️ Limitação Principal:</strong> No sistema atual, pessoa física não tem direito a créditos de PIS/COFINS, 
+                        e os créditos de ICMS são restritos a insumos diretamente produtivos.
+                    </div>
+                </div>
+
+                <div class="credits-content" id="credits-reform">
+                    <div class="credit-column positive full-reform">
+                        <h5>✅ NÃO-CUMULATIVIDADE PLENA - Todos Geram Crédito</h5>
+                        <ul class="credit-list" style="columns: 2; column-gap: 2rem;">
+                            <li>✅ TODOS os insumos agropecuários</li>
+                            <li>✅ TODAS as máquinas e equipamentos</li>
+                            <li>✅ TODA energia elétrica utilizada</li>
+                            <li>✅ TODO combustível (produtivo + administrativo)</li>
+                            <li>✅ TODOS os fretes e transportes</li>
+                            <li>✅ TODOS os seguros da atividade</li>
+                            <li>✅ TODOS os serviços especializados</li>
+                            <li>✅ Materiais de escritório</li>
+                            <li>✅ Equipamentos de informática</li>
+                            <li>✅ Serviços de consultoria</li>
+                            <li>✅ Armazenagem e beneficiamento</li>
+                            <li>✅ Análises laboratoriais</li>
+                            <li>✅ Treinamentos e capacitação</li>
+                            <li>✅ Depreciação de TODOS os bens</li>
+                            <li>✅ Aluguéis relacionados à atividade</li>
+                        </ul>
+                    </div>
+                    <div class="alert success" style="margin-top: 2rem;">
+                        <strong>🎯 Vantagem da Reforma:</strong> A não-cumulatividade plena permite aproveitamento de créditos 
+                        sobre TODOS os bens e serviços utilizados na atividade, independente da estrutura jurídica.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🧠 Quiz: Teste seus Conhecimentos</h2>
+                <p>8 perguntas atualizadas sobre diferimento, créditos e responsabilidade tributária</p>
+            </div>
+
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <div style="flex: 1;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressBar"></div>
+                        </div>
+                        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-light);">
+                            Pergunta <span id="currentQuestion">1</span> de <span id="totalQuestions">8</span>
+                        </div>
+                    </div>
+                    <div style="font-weight: 600; color: var(--primary);">
+                        Pontuação: <span id="currentScore">0</span>
+                    </div>
+                </div>
+
+                <div class="question-card" id="questionCard">
+                    <h3 id="questionText">Clique em "Iniciar Quiz" para começar!</h3>
+                    <div class="options-container" id="optionsContainer">
+                        <!-- Opções serão inseridas dinamicamente -->
+                    </div>
+                    <div class="explanation-card" id="explanationCard" style="display: none;">
+                        <h4>💡 Explicação:</h4>
+                        <p id="explanationText"></p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn" id="startQuizBtn" onclick="startQuiz()" style="max-width: 300px;">
+                        🎯 Iniciar Quiz
+                    </button>
+                    <button class="btn" id="nextQuestionBtn" onclick="nextQuestion()" style="display: none; max-width: 300px;">
+                        ➡️ Próxima Pergunta
+                    </button>
+                </div>
+
+                <div id="quizResults" style="display: none; text-align: center; margin-top: 2rem;">
+                    <div class="question-card">
+                        <h3>🎉 Quiz Concluído!</h3>
+                        <div style="font-size: 3rem; font-weight: 700; color: var(--success); margin: 1rem 0;">
+                            <span id="finalScore">0</span><span style="font-size: 1.5rem; color: var(--text-light);">/800</span>
+                        </div>
+                        <div id="performanceMessage" style="font-size: 1.2rem; margin-bottom: 1rem;"></div>
+                        <div id="recommendations" style="color: var(--text-light); margin-bottom: 2rem;"></div>
+                        <button class="btn" onclick="resetQuiz()" style="max-width: 300px;">🔄 Reiniciar Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Dados do aplicativo
+        const appData = {
+            quiz_questions: [
+                {
+                    question: "No regime atual, o produtor rural pessoa física paga ICMS diretamente?",
+                    options: ["Sim, sempre paga 12-18%", "Não, é diferido para o adquirente", "Só se faturar mais que R$ 3,6 mi", "Depende do tipo de produto"],
+                    correct: 1,
+                    explanation: "O ICMS do produtor rural pessoa física é diferido, sendo recolhido pelo adquirente (cooperativa, indústria, etc.). O produtor não paga diretamente, mas a carga existe na cadeia produtiva."
+                },
+                {
+                    question: "Qual a carga tributária DIRETA atual do produtor rural pessoa física?",
+                    options: ["12-18% (ICMS padrão)", "5-8% (reduzida)", "0% (diferimento total)", "Varia por estado"],
+                    correct: 2,
+                    explanation: "O produtor rural pessoa física não recolhe tributos diretamente devido ao diferimento do ICMS e não ser contribuinte de PIS/COFINS. A responsabilidade é transferida para terceiros."
+                },
+                {
+                    question: "Na cadeia produtiva atual, qual a carga tributária típica do ICMS?",
+                    options: ["0-2%", "5-8%", "12-18%", "20-25%"],
+                    correct: 2,
+                    explanation: "O ICMS na cadeia produtiva varia entre 12-18% conforme o estado, sendo recolhido pelo adquirente do produtor rural (cooperativa, indústria, comerciante)."
+                },
+                {
+                    question: "A partir de quando a reforma tributária inicia sua implementação?",
+                    options: ["Janeiro de 2025", "Janeiro de 2026", "Janeiro de 2030", "Janeiro de 2033"],
+                    correct: 1,
+                    explanation: "A reforma inicia em janeiro de 2026 com fase de testes (CBS 0,9% + IBS 0,1%), implementação gradual até 2032 e sistema completo em 2033."
+                },
+                {
+                    question: "Qual o limite de faturamento para não ser contribuinte obrigatório do IBS e CBS?",
+                    options: ["R$ 1,8 milhão", "R$ 2,4 milhão", "R$ 3,6 milhões", "R$ 4,8 milhões"],
+                    correct: 2,
+                    explanation: "Produtores com receita inferior a R$ 3,6 milhões anuais não serão contribuintes obrigatórios do IBS e CBS, podendo optar pelo regime regular para aproveitar créditos."
+                },
+                {
+                    question: "No sistema atual, pessoa física tem direito a créditos de PIS/COFINS?",
+                    options: ["Sim, sempre", "Não, nunca", "Só em casos especiais", "Depende do faturamento"],
+                    correct: 1,
+                    explanation: "Pessoa física não é contribuinte de PIS/COFINS, portanto não tem direito a qualquer crédito destes tributos, mesmo comprando insumos com tributos destacados."
+                },
+                {
+                    question: "Produtos agropecuários in natura terão qual benefício na reforma?",
+                    options: ["Isenção total", "Alíquota reduzida de 40%", "Alíquota reduzida de 60%", "Diferimento mantido"],
+                    correct: 2,
+                    explanation: "Produtos agropecuários in natura terão alíquota reduzida de 60% sobre a alíquota geral da CBS e IBS, resultando em carga efetiva de ~11,1%."
+                },
+                {
+                    question: "A principal vantagem da não-cumulatividade plena na reforma é:",
+                    options: ["Redução das alíquotas", "Crédito sobre TODOS os bens/serviços", "Fim das obrigações acessórias", "Isenção para pequenos produtores"],
+                    correct: 1,
+                    explanation: "A não-cumulatividade plena permitirá aproveitamento de créditos sobre TODOS os bens e serviços utilizados, incluindo itens administrativos que hoje não geram crédito."
+                }
+            ],
+
+            inputs_categories: {
+                "Insumos Diretos": {
+                    fertilizantes: "Fertilizantes e corretivos",
+                    sementes: "Sementes e mudas",
+                    defensivos: "Defensivos agrícolas",
+                    racao: "Ração e suplementos",
+                    medicamentos: "Medicamentos veterinários"
+                },
+                "Máquinas e Equipamentos": {
+                    tratores: "Tratores e implementos",
+                    irrigacao: "Sistemas de irrigação",
+                    ordenha: "Equipamentos de ordenha",
+                    colheita: "Máquinas de colheita",
+                    outros_equip: "Outros equipamentos"
+                },
+                "Insumos Operacionais": {
+                    combustivel: "Combustível",
+                    energia: "Energia elétrica",
+                    agua: "Água e irrigação",
+                    fretes: "Fretes e transportes",
+                    armazenagem: "Armazenagem"
+                },
+                "Serviços": {
+                    consultoria: "Consultoria técnica",
+                    analises: "Análises de solo/foliar",
+                    veterinarios: "Serviços veterinários",
+                    mao_obra: "Mão de obra especializada",
+                    seguros: "Seguros da atividade"
+                },
+                "Infraestrutura": {
+                    construcoes: "Construções rurais",
+                    melhorias: "Melhorias fundiárias",
+                    cercas: "Cercas e divisões",
+                    estradas: "Estradas internas",
+                    depositos: "Depósitos e silos"
+                }
+            }
+        };
+
+        // Estado da aplicação
+        let currentQuestionIndex = 0;
+        let currentScore = 0;
+        let quizAnswered = [];
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(value);
+        }
+
+        function formatPercentage(value) {
+            return (value * 100).toFixed(1) + '%';
+        }
+
+        // Navegação
+        document.addEventListener('DOMContentLoaded', function() {
+            setupNavigation();
+            populateInputsCategories();
+
+            // Executar simulação automática no início
+            setTimeout(runAdvancedSimulation, 500);
+        });
+
+        function setupNavigation() {
+            const navBtns = document.querySelectorAll('.nav-btn');
+            const sections = document.querySelectorAll('.section');
+
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetSection = btn.dataset.section;
+
+                    navBtns.forEach(b => b.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+
+                    btn.classList.add('active');
+                    document.getElementById(targetSection).classList.add('active');
+                });
+            });
+
+            // Tabs da calculadora
+            const calcTabs = document.querySelectorAll('.calc-tab');
+            const calcContents = document.querySelectorAll('.calc-content');
+
+            calcTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetTab = tab.dataset.tab;
+
+                    calcTabs.forEach(t => t.classList.remove('active'));
+                    calcContents.forEach(c => c.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+        }
+
+        function populateInputsCategories() {
+            const container = document.getElementById('inputsCategories');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            Object.entries(appData.inputs_categories).forEach(([categoria, campos]) => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'inputs-category';
+
+                categoryDiv.innerHTML = `
+                    <h5>${categoria}</h5>
+                    <div class="inputs-grid">
+                        ${Object.entries(campos).map(([key, label]) => `
+                            <div class="input-group">
+                                <label for="${key}">${label}</label>
+                                <input type="number" id="${key}" value="0" min="0" step="10000" data-category="${categoria}">
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                container.appendChild(categoryDiv);
+            });
+        }
+
+        function runAdvancedSimulation() {
+            const revenue = parseFloat(document.getElementById('sim-revenue').value) || 0;
+            const inputs = parseFloat(document.getElementById('sim-inputs').value) || 0;
+            const productType = document.getElementById('sim-product').value;
+            const structureType = document.getElementById('sim-structure').value;
+            const icmsRate = parseFloat(document.getElementById('sim-state').value) / 100;
+
+            // Mostrar loading
+            const btn = document.querySelector('#simulator .btn');
+            btn.classList.add('loading');
+            btn.textContent = '⏳ Simulando...';
+
+            setTimeout(() => {
+                // Cálculos do regime atual
+                let currentDirectTax = 0;
+                let currentChainTax = 0;
+                let currentResponsible = '';
+                let currentDetails = '';
+
+                if (structureType === 'integration') {
+                    currentDirectTax = 0;
+                    currentChainTax = 0;
+                    currentResponsible = 'Integrador (isenção total)';
+                    currentDetails = 'Contratos de integração vertical mantêm isenção completa';
+                } else if (structureType === 'pf') {
+                    currentDirectTax = 0;
+                    currentChainTax = revenue * icmsRate;
+                    currentResponsible = 'Cooperativa/Indústria (diferimento)';
+                    currentDetails = 'Pessoa física: ICMS diferido, não contribuinte PIS/COFINS';
+                } else {
+                    // Pessoa jurídica
+                    currentDirectTax = revenue * 0.02; // PIS/COFINS estimado
+                    currentChainTax = revenue * icmsRate;
+                    currentResponsible = 'Misto: PJ paga PIS/COFINS, ICMS diferido';
+                    currentDetails = 'Pessoa jurídica: alguns créditos disponíveis';
+                }
+
+                // Cálculos da reforma
+                let cbsRate, ibsRate;
+                if (productType === 'in_natura') {
+                    cbsRate = 0.036; // 3,6%
+                    ibsRate = 0.075; // 7,5%
+                } else {
+                    cbsRate = 0.09; // 9%
+                    ibsRate = 0.19; // 19%
+                }
+
+                const cbsTax = revenue * cbsRate;
+                const ibsTax = revenue * ibsRate;
+                const totalReformTax = cbsTax + ibsTax;
+                const inputCredits = inputs * (cbsRate + ibsRate);
+                const netReformTax = Math.max(0, totalReformTax - inputCredits);
+
+                // Análise de impacto
+                const totalCurrentCost = currentDirectTax + currentChainTax;
+                const savings = totalCurrentCost - netReformTax;
+                const savingsPercentage = totalCurrentCost > 0 ? (savings / totalCurrentCost) * 100 : 0;
+                const effectiveRate = revenue > 0 ? (netReformTax / revenue) * 100 : 0;
+
+                // Atualizar resultado rápido
+                const quickResult = document.getElementById('quickResult');
+                quickResult.innerHTML = `
+                    <div class="value">${formatCurrency(savings)}</div>
+                    <div class="label">${savings >= 0 ? 'Economia Potencial na Cadeia' : 'Custo Adicional'}</div>
+                    <div class="percentage ${savings >= 0 ? 'positive' : 'negative'}">
+                        ${savings >= 0 ? '+' : ''}${savingsPercentage.toFixed(1)}%
+                    </div>
+                `;
+
+                // Mostrar resultados detalhados
+                const advancedResults = document.getElementById('advancedResults');
+                advancedResults.innerHTML = `
+                    <div class="comparison-cards">
+                        <div class="scenario-card current">
+                            <div class="scenario-title">📍 Regime Atual</div>
+                            <div class="tax-item">
+                                <span class="tax-label">Produtor paga diretamente:</span>
+                                <span class="tax-value">${formatCurrency(currentDirectTax)}</span>
+                            </div>
+                            <div class="tax-item">
+                                <span class="tax-label">Carga na cadeia produtiva:</span>
+                                <span class="tax-value">${formatCurrency(currentChainTax)}</span>
+                            </div>
+                            <div class="tax-item total">
+                                <span class="tax-label">Total na cadeia:</span>
+                                <span class="tax-value">${formatCurrency(totalCurrentCost)}</span>
+                            </div>
+                            <div class="responsible">
+                                <strong>Responsável:</strong> ${currentResponsible}
+                            </div>
+                            <small style="color: var(--text-light); font-style: italic; margin-top: 0.5rem; display: block;">
+                                ${currentDetails}
+                            </small>
+                        </div>
+
+                        <div class="scenario-card reform">
+                            <div class="scenario-title">🔄 Reforma Tributária</div>
+                            <div class="tax-item">
+                                <span class="tax-label">CBS (${formatPercentage(cbsRate)}):</span>
+                                <span class="tax-value">${formatCurrency(cbsTax)}</span>
+                            </div>
+                            <div class="tax-item">
+                                <span class="tax-label">IBS (${formatPercentage(ibsRate)}):</span>
+                                <span class="tax-value">${formatCurrency(ibsTax)}</span>
+                            </div>
+                            <div class="tax-item">
+                                <span class="tax-label">Créditos de insumos:</span>
+                                <span class="tax-value credit">-${formatCurrency(inputCredits)}</span>
+                            </div>
+                            <div class="tax-item total">
+                                <span class="tax-label">Total líquido:</span>
+                                <span class="tax-value">${formatCurrency(netReformTax)}</span>
+                            </div>
+                            <div class="responsible">
+                                <strong>Responsável:</strong> ${revenue > 3600000 ? 'Próprio produtor (obrigatório)' : 'Opcional: pode escolher ser contribuinte'}
+                            </div>
+                            <small style="color: var(--text-light); font-style: italic; margin-top: 0.5rem; display: block;">
+                                Alíquota efetiva: ${effectiveRate.toFixed(1)}% sobre a receita
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="impact-analysis">
+                        <h4>💰 Resumo do Impacto</h4>
+                        <div class="impact-grid">
+                            <div class="impact-item">
+                                <div class="impact-value" style="color: ${savings >= 0 ? 'white' : '#ffcccb'};">
+                                    ${savings >= 0 ? '+' : ''}${formatCurrency(savings)}
+                                </div>
+                                <div class="impact-label">${savings >= 0 ? 'Economia na Cadeia' : 'Custo Adicional'}</div>
+                            </div>
+                            <div class="impact-item">
+                                <div class="impact-value">${savingsPercentage.toFixed(1)}%</div>
+                                <div class="impact-label">Variação Percentual</div>
+                            </div>
+                            <div class="impact-item">
+                                <div class="impact-value">${formatCurrency(netReformTax)}</div>
+                                <div class="impact-label">Capital de Giro Necessário</div>
+                            </div>
+                            <div class="impact-item">
+                                <div class="impact-value">${effectiveRate.toFixed(1)}%</div>
+                                <div class="impact-label">Alíquota Efetiva (Reforma)</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                advancedResults.style.display = 'block';
+                advancedResults.scrollIntoView({ behavior: 'smooth' });
+
+                // Remover loading
+                btn.classList.remove('loading');
+                btn.textContent = '🚀 Simular Cenário Completo';
+            }, 1500);
+        }
+
+        function calculateDetailedImpact() {
+            const revenue = parseFloat(document.getElementById('calc-revenue').value) || 0;
+
+            // Coletar todos os valores de insumos
+            let totalInputs = 0;
+            const inputsData = {};
+
+            Object.keys(appData.inputs_categories).forEach(categoria => {
+                inputsData[categoria] = {};
+                Object.keys(appData.inputs_categories[categoria]).forEach(campo => {
+                    const valor = parseFloat(document.getElementById(campo).value) || 0;
+                    inputsData[categoria][campo] = valor;
+                    totalInputs += valor;
+                });
+            });
+
+            // Cálculos da reforma (assumindo produtos in natura)
+            const cbsRate = 0.036;
+            const ibsRate = 0.075;
+            const totalRate = cbsRate + ibsRate;
+
+            const grossTax = revenue * totalRate;
+            const inputCredits = totalInputs * totalRate;
+            const netTax = Math.max(0, grossTax - inputCredits);
+
+            // Regime atual
+            const currentChainTax = revenue * 0.15;
+            const savings = currentChainTax - netTax;
+
+            // Mostrar resultados
+            const resultsContainer = document.getElementById('detailedCalcResults');
+            resultsContainer.innerHTML = `
+                <h4 style="color: var(--primary); margin-bottom: 2rem; text-align: center;">📊 Análise Detalhada por Categoria</h4>
+
+                <div class="comparison-cards">
+                    <div class="scenario-card current">
+                        <div class="scenario-title">📍 Regime Atual</div>
+                        <div class="tax-item">
+                            <span class="tax-label">Produtor paga diretamente:</span>
+                            <span class="tax-value">R$ 0</span>
+                        </div>
+                        <div class="tax-item total">
+                            <span class="tax-label">Carga na cadeia (15%):</span>
+                            <span class="tax-value">${formatCurrency(currentChainTax)}</span>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card reform">
+                        <div class="scenario-title">🔄 Reforma Tributária</div>
+                        <div class="tax-item">
+                            <span class="tax-label">Tributos brutos:</span>
+                            <span class="tax-value">${formatCurrency(grossTax)}</span>
+                        </div>
+                        <div class="tax-item">
+                            <span class="tax-label">Créditos de insumos:</span>
+                            <span class="tax-value credit">-${formatCurrency(inputCredits)}</span>
+                        </div>
+                        <div class="tax-item total">
+                            <span class="tax-label">Tributos líquidos:</span>
+                            <span class="tax-value">${formatCurrency(netTax)}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="impact-analysis">
+                    <h4>📈 Resumo da Análise</h4>
+                    <div class="impact-grid">
+                        <div class="impact-item">
+                            <div class="impact-value">${savings > 0 ? '+' : ''}${formatCurrency(savings)}</div>
+                            <div class="impact-label">Economia na Cadeia</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-value">${formatCurrency(totalInputs)}</div>
+                            <div class="impact-label">Total de Insumos</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-value">${((netTax / revenue) * 100).toFixed(1)}%</div>
+                            <div class="impact-label">Alíquota Efetiva</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-value">${formatCurrency(inputCredits)}</div>
+                            <div class="impact-label">Créditos Ampliados</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: var(--surface); padding: 2rem; border-radius: 16px; margin-top: 2rem;">
+                    <h5 style="color: var(--primary); margin-bottom: 1.5rem;">📋 Detalhamento por Categoria</h5>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        ${Object.entries(inputsData).map(([categoria, campos]) => {
+                            const totalCategoria = Object.values(campos).reduce((sum, val) => sum + val, 0);
+                            const creditoCategoria = totalCategoria * totalRate;
+
+                            return totalCategoria > 0 ? `
+                                <div style="background: rgba(26, 104, 115, 0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--primary);">
+                                    <div style="font-weight: 600; margin-bottom: 0.5rem;">${categoria}</div>
+                                    <div style="color: var(--primary); font-weight: 600;">${formatCurrency(totalCategoria)}</div>
+                                    <div style="font-size: 0.9rem; color: var(--success);">Crédito: ${formatCurrency(creditoCategoria)}</div>
+                                </div>
+                            ` : '';
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+
+            resultsContainer.style.display = 'block';
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showCreditsTab(tab) {
+            document.querySelectorAll('.credits-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.credits-content').forEach(c => c.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById('credits-' + tab).classList.add('active');
+        }
+
+        // Quiz Functions
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            currentScore = 0;
+            quizAnswered = [];
+
+            document.getElementById('startQuizBtn').style.display = 'none';
+            document.getElementById('quizResults').style.display = 'none';
+
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = appData.quiz_questions[currentQuestionIndex];
+            const total = appData.quiz_questions.length;
+
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('totalQuestions').textContent = total;
+            document.getElementById('currentScore').textContent = currentScore;
+
+            const progressPercent = ((currentQuestionIndex + 1) / total) * 100;
+            document.getElementById('progressBar').style.width = progressPercent + '%';
+
+            document.getElementById('questionText').textContent = question.question;
+
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const optionBtn = document.createElement('button');
+                optionBtn.className = 'option-btn';
+                optionBtn.textContent = option;
+                optionBtn.addEventListener('click', () => selectAnswer(index));
+                optionsContainer.appendChild(optionBtn);
+            });
+
+            document.getElementById('explanationCard').style.display = 'none';
+            document.getElementById('nextQuestionBtn').style.display = 'none';
+        }
+
+        function selectAnswer(selectedIndex) {
+            const question = appData.quiz_questions[currentQuestionIndex];
+            const isCorrect = selectedIndex === question.correct;
+            const options = document.querySelectorAll('.option-btn');
+
+            options.forEach((btn, index) => {
+                btn.disabled = true;
+                if (index === question.correct) {
+                    btn.classList.add('correct');
+                } else if (index === selectedIndex && !isCorrect) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (isCorrect) {
+                currentScore += 100;
+                document.getElementById('currentScore').textContent = currentScore;
+            }
+
+            quizAnswered.push({
+                questionIndex: currentQuestionIndex,
+                selectedAnswer: selectedIndex,
+                isCorrect: isCorrect
+            });
+
+            document.getElementById('explanationText').textContent = question.explanation;
+            document.getElementById('explanationCard').style.display = 'block';
+
+            if (currentQuestionIndex < appData.quiz_questions.length - 1) {
+                document.getElementById('nextQuestionBtn').style.display = 'inline-block';
+            } else {
+                setTimeout(showQuizResults, 1000);
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            showQuestion();
+        }
+
+        function showQuizResults() {
+            const totalQuestions = appData.quiz_questions.length;
+            const percentage = Math.round((currentScore / (totalQuestions * 100)) * 100);
+
+            document.getElementById('finalScore').textContent = currentScore;
+            document.getElementById('questionCard').style.display = 'none';
+            document.getElementById('nextQuestionBtn').style.display = 'none';
+            document.getElementById('quizResults').style.display = 'block';
+
+            let performanceMessage = '';
+            let recommendations = '';
+
+            if (percentage >= 80) {
+                performanceMessage = '🎉 Excelente! Você domina bem os conceitos da reforma tributária.';
+                recommendations = 'Continue acompanhando as regulamentações específicas e aproveite os créditos ampliados na reforma.';
+            } else if (percentage >= 60) {
+                performanceMessage = '👍 Bom desempenho! Você tem boa base sobre a reforma.';
+                recommendations = 'Revise os conceitos de diferimento vs tributação direta e explore mais o quadro comparativo de créditos.';
+            } else {
+                performanceMessage = '📚 Há espaço para melhorar. Continue estudando!';
+                recommendations = 'Foque nos conceitos básicos e use mais o simulador para entender os impactos práticos da reforma.';
+            }
+
+            document.getElementById('performanceMessage').textContent = performanceMessage;
+            document.getElementById('recommendations').textContent = recommendations;
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            currentScore = 0;
+            quizAnswered = [];
+
+            document.getElementById('questionCard').style.display = 'block';
+            document.getElementById('quizResults').style.display = 'none';
+            document.getElementById('startQuizBtn').style.display = 'inline-block';
+
+            document.getElementById('currentQuestion').textContent = '1';
+            document.getElementById('totalQuestions').textContent = appData.quiz_questions.length;
+            document.getElementById('currentScore').textContent = '0';
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('questionText').textContent = 'Clique em "Iniciar Quiz" para começar!';
+            document.getElementById('optionsContainer').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
